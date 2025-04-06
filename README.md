@@ -30,7 +30,7 @@ export RCLONE_CONFIG_CLMS_PROVIDER='Ceph'
 ```
 clms_upload.sh -b CLMS-YOUR-BUCKET-NAME -l /tmp/c_gls_NDVI_200503110000_GLOBE_VGT_V3.0.1.nc
 ```
-###Batch upload of all NetCDF files residing localy in /home/ubuntu directory::
+###Batch upload of all NetCDF files stored locally in /home/ubuntu directory::
 ```
 find /home/ubuntu -name '*.nc' | xargs -l -P 5 bash -c 'clms_upload.sh -b CLMS-YOUR-BUCKET-NAME -l $0'
 ```
@@ -62,11 +62,11 @@ export RCLONE_CONFIG_LOT2_PROVIDER='Ceph'
 ./lot2_upload.sh -l c_gls_SWE5K_202407130000_NHEMI_SSMIS_V2.0.1.nc -p webResources/catalogTree/netcdf/snow_water_equivalent/swe_5km_v2_daily/2024/20240713
 ###Batch upload if directory structure in your LOCAL STORAGE follows old CLMS path convention e.g. webResources/catalogTree/netcdf/snow_water_equivalent/swe_5km_v2_daily:
 
-####Batch upload of all NetCDFs for dataset swe_5km_v2_daily stored localy in /home/johnlane/webResources/catalogTree/netcdf/snow_water_equivalent/swe_5km_v2_daily:
+####Batch upload of all NetCDFs for dataset swe_5km_v2_daily stored locally in /home/johnlane/webResources/catalogTree/netcdf/snow_water_equivalent/swe_5km_v2_daily:
 ```
 find /home/ubuntu/webResources/catalogTree/netcdf/snow_water_equivalent/swe_5km_v2_daily -name '*.nc' | xargs -l -P 5 bash -c './lot2_upload.sh -l $0 -p $(dirname $0 | sed -z "s/.*webResources/webResources/")'
 ```
-####Batch upload of all tiff for dataset swe_5km_v2_daily stored localy in /home/johnlane/webResources/catalogTree/netcdf/snow_water_equivalent/swe_5km_v2_daily:
+####Batch upload of all tiff for dataset swe_5km_v2_daily stored locally in /home/johnlane/webResources/catalogTree/netcdf/snow_water_equivalent/swe_5km_v2_daily:
 ```
 find /home/ubuntu/webResources/catalogTree/netcdf/snow_water_equivalent/swe_5km_v2_daily -name '*.tif' | xargs -l -P 5 bash -c './lot2_upload.sh -l $0 -p $(dirname $0 | sed -z "s/.*webResources/webResources/")'
 ```
@@ -74,7 +74,7 @@ find /home/ubuntu/webResources/catalogTree/netcdf/snow_water_equivalent/swe_5km_
 ```
 find /home/ubuntu/webResources/catalogTree/netcdf/snow_water_equivalent/swe_5km_v2_daily -type f | xargs -l -P 5 bash -c './lot2_upload.sh -l $0 -p $(dirname $0 | sed -z "s/.*webResources/webResources/")'
 ```
-# For WINDOS and MacOS users the tool can be executed via Docker environment
+# For WINDOWS and MacOS users the tool can be executed via Docker environment
 ##Build Docker container
 
 Build the cdse_utilities Docker image:
