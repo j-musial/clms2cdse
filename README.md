@@ -5,7 +5,7 @@ This repository holds tools to integrate Copernicus Land Monitoring Service data
 
 This utility copies CLMS products from **LOCAL STORAGE** of a producer to the CDSE staging storage:
 
-### Prerequisites:
+## Prerequisites:
 
 - Linux distribution with bash shell and pre-installed [rclone](https://rclone.org/docs/) and [gdal+ogr](https://gdal.org/en/stable/download.html#binaries) utilities.
 - Exported environmental variables. Can be added to [.bashrc](https://www.digitalocean.com/community/tutorials/bashrc-file-in-linux) file:
@@ -18,7 +18,7 @@ export RCLONE_CONFIG_CLMS_REGION=default
 export RCLONE_CONFIG_CLMS_ENDPOINT='https://s3.waw3-1.cloudferro.com'
 export RCLONE_CONFIG_CLMS_PROVIDER='Ceph'
 ```
-###Tool options:
+##Tool options:
 ```
    -b	   bucket name to upload to specific to a producer e.g. CLMS-YOUR-BUCKET-NAME
    -h      this message
@@ -26,18 +26,18 @@ export RCLONE_CONFIG_CLMS_PROVIDER='Ceph'
    -o      Shall input file in the CLMS-YOUR-BUCKET-NAME bucket in the CDSE staging storage be overwritten?
    -v      version
 ```
-###Single CLMS product upload:
+##Single CLMS product upload:
 ```
 clms_upload.sh -b CLMS-YOUR-BUCKET-NAME -l /tmp/c_gls_NDVI_200503110000_GLOBE_VGT_V3.0.1.nc
 ```
-###Batch upload of all NetCDF files stored locally in /home/ubuntu directory::
+##Batch upload of all NetCDF files stored locally in /home/ubuntu directory::
 ```
 find /home/ubuntu -name '*.nc' | xargs -l -P 5 bash -c 'clms_upload.sh -b CLMS-YOUR-BUCKET-NAME -l $0'
 ```
 ## [lot2_upload.sh](https://github.com/j-musial/clms2cdse/blob/main/lot2_upload.sh) - tool to upload CLMS LOT2 archival data sets to CDSE without product patching
 
 This utility copies CLMS LOT2 products from **LOCAL STORAGE** of a producer to the CDSE staging storage:
-### Prerequisites:
+## Prerequisites:
 
 - Linux distribution with bash shell and pre-installed [rclone](https://rclone.org/docs/) and [gdal+ogr](https://gdal.org/en/stable/download.html#binaries) utilities.
 - Exported environmental variables. Can be added to [.bashrc](https://www.digitalocean.com/community/tutorials/bashrc-file-in-linux) file:
@@ -50,7 +50,7 @@ export RCLONE_CONFIG_LOT2_REGION=default
 export RCLONE_CONFIG_LOT2_ENDPOINT='https://s3.waw3-1.cloudferro.com'
 export RCLONE_CONFIG_LOT2_PROVIDER='Ceph'
 ```
-###Tool options:
+##Tool options:
 ```
    -h      this message
    -l      local path (i.e. file system) path to input file
@@ -58,19 +58,19 @@ export RCLONE_CONFIG_LOT2_PROVIDER='Ceph'
    -p	   Relative path of a file in the S3 bucket of the CLMS producer e.g. webResources/catalogTree/netcdf/snow_water_equivalent/swe_5km_v2_daily/2024/20240713
    -v      version
 ```
-###Single CLMS product upload:
+##Single CLMS product upload:
 ./lot2_upload.sh -l c_gls_SWE5K_202407130000_NHEMI_SSMIS_V2.0.1.nc -p webResources/catalogTree/netcdf/snow_water_equivalent/swe_5km_v2_daily/2024/20240713
-###Batch upload if directory structure in your LOCAL STORAGE follows old CLMS path convention e.g. webResources/catalogTree/netcdf/snow_water_equivalent/swe_5km_v2_daily:
+##Batch upload if directory structure in your LOCAL STORAGE follows old CLMS path convention e.g. webResources/catalogTree/netcdf/snow_water_equivalent/swe_5km_v2_daily:
 
-####Batch upload of all NetCDFs for dataset swe_5km_v2_daily stored locally in /home/johnlane/webResources/catalogTree/netcdf/snow_water_equivalent/swe_5km_v2_daily:
+##Batch upload of all NetCDFs for dataset swe_5km_v2_daily stored locally in /home/johnlane/webResources/catalogTree/netcdf/snow_water_equivalent/swe_5km_v2_daily:
 ```
 find /home/ubuntu/webResources/catalogTree/netcdf/snow_water_equivalent/swe_5km_v2_daily -name '*.nc' | xargs -l -P 5 bash -c './lot2_upload.sh -l $0 -p $(dirname $0 | sed -z "s/.*webResources/webResources/")'
 ```
-####Batch upload of all tiff for dataset swe_5km_v2_daily stored locally in /home/johnlane/webResources/catalogTree/netcdf/snow_water_equivalent/swe_5km_v2_daily:
+##Batch upload of all tiff for dataset swe_5km_v2_daily stored locally in /home/johnlane/webResources/catalogTree/netcdf/snow_water_equivalent/swe_5km_v2_daily:
 ```
 find /home/ubuntu/webResources/catalogTree/netcdf/snow_water_equivalent/swe_5km_v2_daily -name '*.tif' | xargs -l -P 5 bash -c './lot2_upload.sh -l $0 -p $(dirname $0 | sed -z "s/.*webResources/webResources/")'
 ```
-####Batch upload of all files in /home/johnlane/webResources/catalogTree/netcdf/snow_water_equivalent/swe_5km_v2_daily:
+##Batch upload of all files in /home/johnlane/webResources/catalogTree/netcdf/snow_water_equivalent/swe_5km_v2_daily:
 ```
 find /home/ubuntu/webResources/catalogTree/netcdf/snow_water_equivalent/swe_5km_v2_daily -type f | xargs -l -P 5 bash -c './lot2_upload.sh -l $0 -p $(dirname $0 | sed -z "s/.*webResources/webResources/")'
 ```
